@@ -1,3 +1,8 @@
+# @before-stub-for-debug-begin
+from python3problem36 import *
+from typing import *
+# @before-stub-for-debug-end
+
 #
 # @lc app=leetcode.cn id=36 lang=python3
 #
@@ -7,24 +12,24 @@
 # @lc code=start
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        # 同行不重复
-        # 同列不重复
-        # 同3x3宫格不重复
-        for i in range(9): # 行
-            for j in range(9): # 列
-                if board[i][j] == '.':
-                    continue
-                # 判断是否重复
-                for k in range(9):
-                    if j != k and board[i][j] == board[i][k] or i != k and board[i][j] == board[k][j]:
-                        return False
-                # 判断3x3宫格
-                i_begin, j_begin = i // 3 * 3, j // 3 * 3
-                for m in range(i_begin, i_begin + 3):
-                    for n in range(j_begin, j_begin + 3):
-                        if i != m and j != n and board[i][j] == board[m][n]:
-                            return False
+        rows = [{} for _ in range(9)]
+        columns = [{} for _ in range(9)]
+        boxes = [{} for _ in range(9)]
 
+        for i in range(9):
+            for j in range(9):
+                num = board[i][j]
+                if num == ".":
+                    continue
+
+                rows[i][num] = rows[i].get(num, 0) + 1
+                columns[j][num] = columns[j].get(num, 0) + 1
+                boxex_index = (i // 3) * 3 + j // 3
+                boxes[boxex_index][num] = boxes[boxex_index].get(num, 0) + 1
+
+                if rows[i][num] > 1 or columns[j][num] > 1 or boxes[boxex_index][num] > 1:
+                    return False
+                
         return True
 
 # @lc code=end
@@ -53,6 +58,31 @@ class HistorySolution:
                         if i != m and j != n and board[i][j] == board[m][n]:
                             return False
 
+        return True
+    
+    # 507/507 cases passed (43 ms)
+    # Your runtime beats 66.04 % of python3 submissions
+    # Your memory usage beats 37.12 % of python3 submissions (16.4 MB)
+    def isValidSudoku2(self, board: List[List[str]]) -> bool:
+
+        rows = [{} for _ in range(9)]
+        columns = [{} for _ in range(9)]
+        boxes = [{} for _ in range(9)]
+
+        for i in range(9):
+            for j in range(9):
+                num = board[i][j]
+                if num == ".":
+                    continue
+
+                rows[i][num] = rows[i].get(num, 0) + 1
+                columns[j][num] = columns[j].get(num, 0) + 1
+                boxex_index = (i // 3) * 3 + j // 3
+                boxes[boxex_index][num] = boxes[boxex_index].get(num, 0) + 1
+
+                if rows[i][num] > 1 or columns[j][num] > 1 or boxes[boxex_index][num] > 1:
+                    return False
+                
         return True
 # @history 2021/7/6 end
 
