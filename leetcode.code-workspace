@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"DockerRun.DisableDockerrc": true,
+		"DockerRun.DisableAutoGenerateConfig": true
+	},
+	"extensions": {
+		"recommendations": [
+			"ccagml.vscode-leetcode-problem-rating",
+			"labuladong.leethelper",
+			"wangtao0101.debug-leetcode",
+		]
+	}
+}
